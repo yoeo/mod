@@ -44,7 +44,29 @@ class Modular:
         return self._modulo
 
     def copy(self, modulo=None):
+        """Copy a Modular, a new modulo value can be specified"""
         return Modular(self._value, modulo if modulo else self._modulo)
+
+    def _extended_gcd(self):
+        t_value = 0
+        new_t = 1
+        r_value = self._modulo
+        new_r = self._value
+        while True:
+            if new_r == 0:
+                return [r_value, t_value]
+            quotient = r_value // new_r
+            t_value, new_t = new_t, t_value - quotient * new_t
+            r_value, new_r = new_r, r_value - quotient * new_r
+
+    def inverse(self):
+        """Inverse of the Modular: x => (x * a) % m == 1"""
+        r_value, t_value = self._extended_gcd()
+        if r_value != 1:
+            raise ValueError("the value cannot be inverted")
+
+        value = t_value + (self._modulo if t_value < 0 else 0)
+        return Modular(value, self._modulo)
 
     # Comparison operators
 
@@ -131,16 +153,35 @@ class Modular:
         return other / self._value
 
     def __floordiv__(self, other):
-        return NotImplemented
+        converted = self._convert(other)
+        if converted is None:
+            return (self._value // other) % self._modulo
+
+        print(self, converted, converted.inverse())
+        return self * converted.inverse()
 
     def __rfloordiv__(self, other):
-        return NotImplemented
+        converted = self._convert(other)
+        if converted is None:
+            return (other // self._value) % self._modulo
+
+        return converted * self.inverse()
 
     def __pow__(self, other):
-        return NotImplemented
+        converted = self._convert(other)
+        if converted is None:
+            return pow(self._value, other, self._modulo)
+
+        result = pow(self._value, converted._value, self._modulo)
+        return Modular(result, self._modulo)
 
     def __rpow__(self, other):
-        return NotImplemented
+        converted = self._convert(other)
+        if converted is None:
+            return pow(other, self._value, self._modulo)
+
+        result = pow(converted._value, self._value, self._modulo)
+        return Modular(result, self._modulo)
 
 
 Number.register(Modular)
