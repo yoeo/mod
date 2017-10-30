@@ -208,7 +208,7 @@ def test_ipow():
 
     modified = number
     modified **= 2
-    assert modified == 14
+    assert modified == 15
     assert modified.modulo == 17
 
     modified = number
