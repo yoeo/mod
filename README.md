@@ -1,6 +1,7 @@
-# modulint
+# modulint [![Build Status](https://travis-ci.org/yoeo/modulint.svg?branch=master)](https://travis-ci.org/yoeo/modulint) [![Documentation Status](https://readthedocs.org/projects/modulint/badge/?version=latest)](http://modulint.readthedocs.io/en/latest/?badge=latest)
 
-Modular arithmetics with integers in Python
+
+Modular arithmetic in Python
 
 ## Install
 
