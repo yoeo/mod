@@ -50,6 +50,20 @@ def test_copy():
     assert other.modulo == 5
 
 
+def test_inverse():
+    number = Modular(7, 17)
+    assert int(number) == 7
+    assert number.modulo == 17
+
+    other = number.inverse()
+    assert int(other) == 5
+    assert other.modulo == 17
+
+    product = number * other
+    assert int(product) == 1
+    assert product.modulo == 17
+
+
 def test_objects_interaction():
     for other in [Modular(12, 17), 12]:
         number = Modular(7, 17) + other
