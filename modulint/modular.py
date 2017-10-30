@@ -1,5 +1,5 @@
 """
-Modular arithmetics operations.
+Modular arithmetic operations.
 
 More details on https://en.wikipedia.org/wiki/Modular_arithmetic
 
