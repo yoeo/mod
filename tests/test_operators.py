@@ -1,8 +1,8 @@
-from modulint import Modular
+from mod import Mod
 
 
 def test_add():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number + 7
@@ -23,7 +23,7 @@ def test_add():
 
 
 def test_iadd():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number
@@ -38,7 +38,7 @@ def test_iadd():
 
 
 def test_sub():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number - 5
@@ -59,7 +59,7 @@ def test_sub():
 
 
 def test_isub():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number
@@ -74,7 +74,7 @@ def test_isub():
 
 
 def test_mul():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number * 2
@@ -95,7 +95,7 @@ def test_mul():
 
 
 def test_imul():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number
@@ -110,7 +110,7 @@ def test_imul():
 
 
 def test_floordiv():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number // 6
@@ -131,7 +131,7 @@ def test_floordiv():
 
 
 def test_ifloordiv():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number
@@ -146,7 +146,7 @@ def test_ifloordiv():
 
 
 def test_truediv():
-    number = Modular(8, 17)
+    number = Mod(8, 17)
     assert number == 8
 
     modified = number / 4
@@ -167,7 +167,7 @@ def test_truediv():
 
 
 def test_itruediv():
-    number = Modular(8, 17)
+    number = Mod(8, 17)
     assert number == 8
 
     modified = number
@@ -182,7 +182,7 @@ def test_itruediv():
 
 
 def test_pow():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number**2
@@ -203,7 +203,7 @@ def test_pow():
 
 
 def test_ipow():
-    number = Modular(7, 17)
+    number = Mod(7, 17)
     assert number == 7
 
     modified = number

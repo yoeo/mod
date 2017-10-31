@@ -1,7 +1,7 @@
 """
-Modular arithmetic operations.
+Mod arithmetic operations.
 
-More details on https://en.wikipedia.org/wiki/Modular_arithmetic
+More details on https://en.wikipedia.org/wiki/Mod_arithmetic
 
 """
 
@@ -10,7 +10,7 @@ from numbers import Number
 
 
 @total_ordering
-class Modular:
+class Mod:
     """Integer Modulo operations"""
 
     def __init__(self, value, modulo):
@@ -44,8 +44,8 @@ class Modular:
         return self._modulo
 
     def copy(self, modulo=None):
-        """Copy a Modular, a new modulo value can be specified"""
-        return Modular(self._value, modulo if modulo else self._modulo)
+        """Copy a Mod, a new modulo value can be specified"""
+        return Mod(self._value, modulo if modulo else self._modulo)
 
     def _extended_gcd(self):
         t_value = 0
@@ -60,13 +60,13 @@ class Modular:
             r_value, new_r = new_r, r_value - quotient * new_r
 
     def inverse(self):
-        """Inverse of the Modular: x => (x * a) % m == 1"""
+        """Inverse of the Mod: x => (x * a) % m == 1"""
         r_value, t_value = self._extended_gcd()
         if r_value != 1:
             raise ValueError("the value cannot be inverted")
 
         value = t_value + (self._modulo if t_value < 0 else 0)
-        return Modular(value, self._modulo)
+        return Mod(value, self._modulo)
 
     # Comparison operators
 
@@ -74,7 +74,7 @@ class Modular:
         if not isinstance(other, Number):
             return False
 
-        if isinstance(other, Modular):
+        if isinstance(other, Mod):
             modulo = min((self._modulo, other._modulo))
         else:
             modulo = self._modulo
@@ -84,7 +84,7 @@ class Modular:
         if not isinstance(other, Number):
             return False
 
-        if isinstance(other, Modular):
+        if isinstance(other, Mod):
             modulo = min((self._modulo, other._modulo))
         else:
             modulo = self._modulo
@@ -96,17 +96,17 @@ class Modular:
         return self.copy()
 
     def __neg__(self):
-        return Modular(-self._value, self._modulo)
+        return Mod(-self._value, self._modulo)
 
     def _convert(self, other):
-        if isinstance(other, Modular):
+        if isinstance(other, Mod):
             if other._modulo != self._modulo:
                 raise ValueError("Modulo values are different {} != {}".format(
                     self._modulo, other._modulo))
             return other
 
         if isinstance(other, int):
-            return Modular(other, self._modulo)
+            return Mod(other, self._modulo)
 
         return None
 
@@ -115,7 +115,7 @@ class Modular:
         if converted is None:
             return (other + self._value) % self._modulo
 
-        return Modular(self._value + converted._value, self._modulo)
+        return Mod(self._value + converted._value, self._modulo)
 
     __radd__ = __add__
 
@@ -124,7 +124,7 @@ class Modular:
         if converted is None:
             return (other - self._value) % self._modulo
 
-        return Modular(self._value - converted._value, self._modulo)
+        return Mod(self._value - converted._value, self._modulo)
 
     def __rsub__(self, other):
         return -self + other
@@ -134,7 +134,7 @@ class Modular:
         if converted is None:
             return (other * self._value) % self._modulo
 
-        return Modular(self._value * converted._value, self._modulo)
+        return Mod(self._value * converted._value, self._modulo)
 
     __rmul__ = __mul__
 
@@ -173,7 +173,7 @@ class Modular:
             return pow(self._value, other, self._modulo)
 
         result = pow(self._value, converted._value, self._modulo)
-        return Modular(result, self._modulo)
+        return Mod(result, self._modulo)
 
     def __rpow__(self, other):
         converted = self._convert(other)
@@ -181,7 +181,7 @@ class Modular:
             return pow(other, self._value, self._modulo)
 
         result = pow(converted._value, self._value, self._modulo)
-        return Modular(result, self._modulo)
+        return Mod(result, self._modulo)
 
 
-Number.register(Modular)
+Number.register(Mod)

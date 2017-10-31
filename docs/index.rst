@@ -1,7 +1,7 @@
-``modulint`` documentation
+``mod`` documentation
 ==========================
 
-``modulint`` implements ``modular arithmetic`` in Python3.
+``mod`` implements ``modular arithmetic`` in Python3.
 
 ``modular arithmetic`` is arithmetic using the modulo operation, ex:
 
@@ -22,10 +22,10 @@ Module usage:
 
 .. code-block:: python
 
-  from modulint import Modular
+  from mod import Mod
 
 
-  number = Modular(7, 9)
+  number = Mod(7, 9)
   print(number + 3)  # prints: (1 % 9)
 
 .. toctree::

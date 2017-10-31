@@ -1,8 +1,8 @@
-# modulint [![Build Status](https://travis-ci.org/yoeo/modulint.svg?branch=master)](https://travis-ci.org/yoeo/modulint) [![Documentation Status](https://readthedocs.org/projects/modulint/badge/?version=latest)](http://modulint.readthedocs.io/en/latest/?badge=latest)
+# mod [![Build Status](https://travis-ci.org/yoeo/mod.svg?branch=master)](https://travis-ci.org/yoeo/mod) [![Documentation Status](https://readthedocs.org/projects/mod/badge/?version=latest)](http://mod.readthedocs.io/en/latest/?badge=latest)
 
-``modulint`` implements modular arithmetic in Python3.
+``mod`` implements modular arithmetic in Python3.
 
-Modular arithmetic is arithmetic using the modulo operation, ex:
+Mod arithmetic is arithmetic using the modulo operation, ex:
 
 ```text
 (1 + 0) % 3 = 1
@@ -11,7 +11,7 @@ Modular arithmetic is arithmetic using the modulo operation, ex:
 (1 + 3) % 3 = 1
 ```
 
-Modular arithmetic is used in many fields like music (octaves),
+Mod arithmetic is used in many fields like music (octaves),
 banking (IBAN error check), book publishing (ISBN checksum),
 cryptography (RSA, DSA algorithms)
 and of course... math.
@@ -25,8 +25,8 @@ pip3 install .
 ## Usage
 
 ```python
->>> from modulint import Modular
->>> x = Modular(3, 7)
+>>> from mod import Mod
+>>> x = Mod(3, 7)
 >>> x
 3
 >>> x + 3
@@ -43,4 +43,4 @@ pip3 install .
 
 # License
 
-modulint — Copyright (c) 2017 Y. SOMDA, [MIT License](LICENSE)
+mod — Copyright (c) 2017 Y. SOMDA, [MIT License](LICENSE)

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
-from modulint import Modular
+from mod import Mod
 
 
 def main():
     print("Simplified/naive RSA implementation")
 
     # Keys definition
-    public_key = Modular(3, 1287302641)
-    private_key = Modular(858153923, public_key.modulo)
+    public_key = Mod(3, 1287302641)
+    private_key = Mod(858153923, public_key.modulo)
 
     # Message
     message = 666
