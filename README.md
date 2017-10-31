@@ -1,7 +1,20 @@
 # modulint [![Build Status](https://travis-ci.org/yoeo/modulint.svg?branch=master)](https://travis-ci.org/yoeo/modulint) [![Documentation Status](https://readthedocs.org/projects/modulint/badge/?version=latest)](http://modulint.readthedocs.io/en/latest/?badge=latest)
 
+``modulint`` implements modular arithmetic in Python3.
 
-Modular arithmetic in Python
+Modular arithmetic is arithmetic using the modulo operation, ex:
+
+```text
+(1 + 0) % 3 = 1
+(1 + 1) % 3 = 2
+(1 + 2) % 3 = 0
+(1 + 3) % 3 = 1
+```
+
+Modular arithmetic is used in many fields like music (octaves),
+banking (IBAN error check), book publishing (ISBN checksum),
+cryptography (RSA, DSA algorithms)
+and of course... math.
 
 ## Install
 
@@ -12,8 +25,8 @@ pip3 install .
 ## Usage
 
 ```python
->>> from modulint import IntMod
->>> x = IntMod(3, 7)
+>>> from modulint import Modular
+>>> x = Modular(3, 7)
 >>> x
 3
 >>> x + 3
