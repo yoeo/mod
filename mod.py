@@ -1,7 +1,6 @@
-"""
-Mod arithmetic operations.
+"""Implements modular arithmetic operations on integers.
 
-More details on https://en.wikipedia.org/wiki/Mod_arithmetic
+See: https://en.wikipedia.org/wiki/Modular_arithmetic
 
 """
 
@@ -11,20 +10,27 @@ from numbers import Number
 
 @total_ordering
 class Mod:
-    """Integer Modulo operations"""
+    """**int** like class that automatically add a modulus
+    to arithmetic operations
+
+    ``value`` -- integer value of the number
+
+    ``modulo`` -- modulus associated to the number
+
+    """
 
     def __init__(self, value, modulo):
-        super().__init__()
-
         if not isinstance(value, Number):
             raise ValueError("Value is not a number")
 
-        if modulo == 0:
-            raise ValueError("Modulo value cannot be zero")
         if not isinstance(modulo, Number):
             raise ValueError("Modulo is not a number")
+
+        if modulo == 0:
+            raise ValueError("Modulo value cannot be zero")
+
         if modulo != int(modulo):
-            raise ValueError("Modulo is not a 'full' integer value")
+            raise ValueError("Modulo is not an integer")
 
         self._modulo = int(modulo)
         self._value = int(value) % self._modulo
@@ -40,11 +46,15 @@ class Mod:
 
     @property
     def modulo(self):
-        """Value of the modulo"""
+        """Returns the modulus value"""
         return self._modulo
 
     def copy(self, modulo=None):
-        """Copy a Mod, a new modulo value can be specified"""
+        """Copy a **Mod** object
+
+        ``modulo`` -- modulus of the new **Mod** object
+
+        """
         return Mod(self._value, modulo if modulo else self._modulo)
 
     def _extended_gcd(self):
@@ -60,7 +70,14 @@ class Mod:
             r_value, new_r = new_r, r_value - quotient * new_r
 
     def inverse(self):
-        """Inverse of the Mod: x => (x * a) % m == 1"""
+        """Modular inverse of the **Mod** number.
+
+        The modular inverse **y** of a number **x** with the modulus **n** is:
+
+        .. math::
+            y × x ≡ 1 (mod. n)
+
+        """
         r_value, t_value = self._extended_gcd()
         if r_value != 1:
             raise ValueError("the value cannot be inverted")
