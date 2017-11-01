@@ -10,12 +10,12 @@ from numbers import Number
 
 @total_ordering
 class Mod:
-    """**int** like class that automatically add a modulus
+    """Integer number that automatically adds a modulus
     to arithmetic operations
 
-    ``value`` -- integer value of the number
+    ``value`` -- integer value
 
-    ``modulo`` -- modulus associated to the number
+    ``modulo`` -- modulus associated with the value
 
     """
 
@@ -50,9 +50,9 @@ class Mod:
         return self._modulo
 
     def copy(self, modulo=None):
-        """Copy a **Mod** object
+        """Copy a **Mod** number
 
-        ``modulo`` -- modulus of the new **Mod** object
+        ``modulo`` -- modulus of the new **Mod** number
 
         """
         return Mod(self._value, modulo if modulo else self._modulo)
@@ -70,9 +70,9 @@ class Mod:
             r_value, new_r = new_r, r_value - quotient * new_r
 
     def inverse(self):
-        """Modular inverse of the **Mod** number.
+        """Modular inverse of the number.
 
-        The modular inverse **y** of a number **x** with the modulus **n** is:
+        **y** is the inverse of **x** with the modulus **n** when:
 
         .. math::
             y × x ≡ 1 (mod. n)
