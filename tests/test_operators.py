@@ -7,19 +7,19 @@ def test_add():
 
     modified = number + 7
     assert modified == 14
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number + 11
     assert modified == 1
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 7 + number
     assert modified == 14
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 11 + number
     assert modified == 1
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_iadd():
@@ -29,12 +29,12 @@ def test_iadd():
     modified = number
     modified += 7
     assert modified == 14
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number
     modified += 11
     assert modified == 1
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_sub():
@@ -43,19 +43,19 @@ def test_sub():
 
     modified = number - 5
     assert modified == 2
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number - 11
     assert modified == 13
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 5 - number
     assert modified == 15
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 11 - number
     assert modified == 4
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_isub():
@@ -65,12 +65,12 @@ def test_isub():
     modified = number
     modified -= 5
     assert modified == 2
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number
     modified -= 11
     assert modified == 13
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_mul():
@@ -79,19 +79,19 @@ def test_mul():
 
     modified = number * 2
     assert modified == 14
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number * 3
     assert modified == 4
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 2 * number
     assert modified == 14
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 3 * number
     assert modified == 4
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_imul():
@@ -101,12 +101,12 @@ def test_imul():
     modified = number
     modified *= 2
     assert modified == 14
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number
     modified *= 3
     assert modified == 4
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_floordiv():
@@ -115,19 +115,19 @@ def test_floordiv():
 
     modified = number // 6
     assert modified == 4
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number // 29
     assert modified == 2
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 14 // number
     assert modified == 2
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 4 // number
     assert modified == 3
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_ifloordiv():
@@ -137,12 +137,12 @@ def test_ifloordiv():
     modified = number
     modified //= 6
     assert modified == 4
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number
     modified //= 29
     assert modified == 2
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_truediv():
@@ -187,19 +187,19 @@ def test_pow():
 
     modified = number**2
     assert modified == 15
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number**3
     assert modified == 3
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 2**number
     assert modified == 9
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = 4**number
     assert modified == 13
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
 
 def test_ipow():
@@ -209,9 +209,9 @@ def test_ipow():
     modified = number
     modified **= 2
     assert modified == 15
-    assert modified.modulo == 17
+    assert modified.modulus == 17
 
     modified = number
     modified **= 3
     assert modified == 3
-    assert modified.modulo == 17
+    assert modified.modulus == 17

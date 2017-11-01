@@ -15,28 +15,28 @@ class Mod:
 
     ``value`` -- integer value
 
-    ``modulo`` -- modulus associated with the value
+    ``modulus`` -- modulus associated with the value
 
     """
 
-    def __init__(self, value, modulo):
+    def __init__(self, value, modulus):
         if not isinstance(value, Number):
             raise ValueError("Value is not a number")
 
-        if not isinstance(modulo, Number):
-            raise ValueError("Modulo is not a number")
+        if not isinstance(modulus, Number):
+            raise ValueError("Modulus is not a number")
 
-        if modulo == 0:
-            raise ValueError("Modulo value cannot be zero")
+        if modulus == 0:
+            raise ValueError("Modulus value cannot be zero")
 
-        if modulo != int(modulo):
-            raise ValueError("Modulo is not an integer")
+        if modulus != int(modulus):
+            raise ValueError("Modulus is not an integer")
 
-        self._modulo = int(modulo)
-        self._value = int(value) % self._modulo
+        self._modulus = int(modulus)
+        self._value = int(value) % self._modulus
 
     def __repr__(self):
-        return '({} % {})'.format(self._value, self._modulo)
+        return '({} % {})'.format(self._value, self._modulus)
 
     def __int__(self):
         return self._value
@@ -45,22 +45,22 @@ class Mod:
         return hash(self._value)
 
     @property
-    def modulo(self):
+    def modulus(self):
         """Returns the modulus value"""
-        return self._modulo
+        return self._modulus
 
-    def copy(self, modulo=None):
+    def copy(self, modulus=None):
         """Copy a **Mod** number
 
-        ``modulo`` -- modulus of the new **Mod** number
+        ``modulus`` -- modulus of the new **Mod** number
 
         """
-        return Mod(self._value, modulo if modulo else self._modulo)
+        return Mod(self._value, modulus if modulus else self._modulus)
 
     def _extended_gcd(self):
         t_value = 0
         new_t = 1
-        r_value = self._modulo
+        r_value = self._modulus
         new_r = self._value
         while True:
             if new_r == 0:
@@ -82,8 +82,8 @@ class Mod:
         if r_value != 1:
             raise ValueError("the value cannot be inverted")
 
-        value = t_value + (self._modulo if t_value < 0 else 0)
-        return Mod(value, self._modulo)
+        value = t_value + (self._modulus if t_value < 0 else 0)
+        return Mod(value, self._modulus)
 
     # Comparison operators
 
@@ -92,20 +92,20 @@ class Mod:
             return False
 
         if isinstance(other, Mod):
-            modulo = min((self._modulo, other._modulo))
+            modulus = min((self._modulus, other._modulus))
         else:
-            modulo = self._modulo
-        return int(self) % modulo == int(other) % modulo
+            modulus = self._modulus
+        return int(self) % modulus == int(other) % modulus
 
     def __lt__(self, other):
         if not isinstance(other, Number):
             return False
 
         if isinstance(other, Mod):
-            modulo = min((self._modulo, other._modulo))
+            modulus = min((self._modulus, other._modulus))
         else:
-            modulo = self._modulo
-        return int(self) % modulo < int(other) % modulo
+            modulus = self._modulus
+        return int(self) % modulus < int(other) % modulus
 
     # Arithmetic operations
 
@@ -113,35 +113,35 @@ class Mod:
         return self.copy()
 
     def __neg__(self):
-        return Mod(-self._value, self._modulo)
+        return Mod(-self._value, self._modulus)
 
     def _convert(self, other):
         if isinstance(other, Mod):
-            if other._modulo != self._modulo:
-                raise ValueError("Modulo values are different {} != {}".format(
-                    self._modulo, other._modulo))
+            if other._modulus != self._modulus:
+                raise ValueError("Not same modulus: {} != {}".format(
+                    self._modulus, other._modulus))
             return other
 
         if isinstance(other, int):
-            return Mod(other, self._modulo)
+            return Mod(other, self._modulus)
 
         return None
 
     def __add__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other + self._value) % self._modulo
+            return (other + self._value) % self._modulus
 
-        return Mod(self._value + converted._value, self._modulo)
+        return Mod(self._value + converted._value, self._modulus)
 
     __radd__ = __add__
 
     def __sub__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other - self._value) % self._modulo
+            return (other - self._value) % self._modulus
 
-        return Mod(self._value - converted._value, self._modulo)
+        return Mod(self._value - converted._value, self._modulus)
 
     def __rsub__(self, other):
         return -self + other
@@ -149,9 +149,9 @@ class Mod:
     def __mul__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other * self._value) % self._modulo
+            return (other * self._value) % self._modulus
 
-        return Mod(self._value * converted._value, self._modulo)
+        return Mod(self._value * converted._value, self._modulus)
 
     __rmul__ = __mul__
 
@@ -172,7 +172,7 @@ class Mod:
     def __floordiv__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (self._value // other) % self._modulo
+            return (self._value // other) % self._modulus
 
         print(self, converted, converted.inverse())
         return self * converted.inverse()
@@ -180,25 +180,25 @@ class Mod:
     def __rfloordiv__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other // self._value) % self._modulo
+            return (other // self._value) % self._modulus
 
         return converted * self.inverse()
 
     def __pow__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return pow(self._value, other, self._modulo)
+            return pow(self._value, other, self._modulus)
 
-        result = pow(self._value, converted._value, self._modulo)
-        return Mod(result, self._modulo)
+        result = pow(self._value, converted._value, self._modulus)
+        return Mod(result, self._modulus)
 
     def __rpow__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return pow(other, self._value, self._modulo)
+            return pow(other, self._value, self._modulus)
 
-        result = pow(converted._value, self._value, self._modulo)
-        return Mod(result, self._modulo)
+        result = pow(converted._value, self._value, self._modulus)
+        return Mod(result, self._modulus)
 
 
 Number.register(Mod)
