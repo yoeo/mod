@@ -105,11 +105,11 @@ Links
 * Python package available at https://pypi.python.org/pypi/mod
 * Source code repository: https://github.com/yoeo/mod
 
-**mod** — Copyright (c) 2017 Y. SOMDA, `MIT License <https://github.com/yoeo/mod/blob/master/LICENSE>`_
-
 Indices
 -------
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+**mod** — Copyright (c) 2017 Y. SOMDA, `MIT License <https://github.com/yoeo/mod/blob/master/LICENSE>`_
