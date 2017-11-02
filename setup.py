@@ -34,7 +34,7 @@ setup(
     # Package info
     name="mod",
     author="Y. SOMDA",
-    version='0.2.1',
+    version='0.2.3',
     url="https://github.com/yoeo/mod",
     description="Modular arithmetic in Python",
     long_description=long_description(),
