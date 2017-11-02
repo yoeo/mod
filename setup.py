@@ -20,7 +20,7 @@ from setuptools import setup
 
 
 def long_description():
-    banned = ('.. toctree', '.. autoclass', '* :ref:')
+    banned = ('.. toctree', '.. autoclass', '* :ref:', '.. image:: _static/')
     comment = '.. '
 
     text = Path(__file__).parent.joinpath('docs', 'index.rst').read_text()
