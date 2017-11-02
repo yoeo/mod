@@ -19,15 +19,25 @@ from pathlib import Path
 from setuptools import setup
 
 
+def long_description():
+    banned = ('.. toctree', '.. autoclass', '* :ref:')
+    comment = '.. '
+
+    text = Path(__file__).parent.joinpath('docs', 'index.rst').read_text()
+    for word in banned:
+        text = text.replace(word, comment)
+
+    return text
+
+
 setup(
     # Package info
     name="mod",
     author="Y. SOMDA",
-    version='0.1',
+    version='0.2.1',
     url="https://github.com/yoeo/mod",
     description="Modular arithmetic in Python",
-    long_description=Path(__file__).parent.joinpath(
-        'docs', 'index.rst').read_text(),
+    long_description=long_description(),
     license="MIT",
     classifiers=[
         "Development Status :: 4 - Beta",
