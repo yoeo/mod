@@ -8,6 +8,9 @@ from functools import total_ordering
 from numbers import Number
 
 
+__version__ = '0.2.3'
+
+
 @total_ordering
 class Mod:
     """Integer number that automatically adds a modulus

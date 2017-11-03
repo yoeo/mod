@@ -18,6 +18,8 @@
 from pathlib import Path
 from setuptools import setup
 
+import mod
+
 
 def long_description():
     banned = ('.. toctree', '.. autoclass', '* :ref:', '.. image:: _static/')
@@ -34,7 +36,7 @@ setup(
     # Package info
     name="mod",
     author="Y. SOMDA",
-    version='0.2.3',
+    version=mod.__version__,
     url="https://github.com/yoeo/mod",
     description="Modular arithmetic in Python",
     long_description=long_description(),
