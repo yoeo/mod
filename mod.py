@@ -16,10 +16,9 @@ class Mod:
     """Integer number that automatically adds a modulus
     to arithmetic operations
 
-    ``value`` -- integer value
-
-    ``modulus`` -- modulus associated with the value
-
+    :param int value: Mod number value
+    :param int modulus: modulus associated with the value
+    :raises ValueError: one of the parameters is not a number or *modulus* == 0
     """
 
     def __init__(self, value, modulus):
@@ -49,14 +48,17 @@ class Mod:
 
     @property
     def modulus(self):
-        """Returns the modulus value"""
+        """Modulus value
+
+        :rtype: int
+        """
         return self._modulus
 
     def copy(self, modulus=None):
-        """Copy a **Mod** number
+        """Copy the Mod number
 
-        ``modulus`` -- modulus of the new **Mod** number
-
+        :param int modulus: modulus of the new Mod number
+        :rtype: Mod
         """
         return Mod(self._value, modulus if modulus else self._modulus)
 
@@ -80,6 +82,7 @@ class Mod:
         .. math::
             y × x ≡ 1 (mod. n)
 
+        :rtype: Mod
         """
         r_value, t_value = self._extended_gcd()
         if r_value != 1:
