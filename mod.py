@@ -180,7 +180,6 @@ class Mod:
         if converted is None:
             return (self._value // other) % self._modulus
 
-        print(self, converted, converted.inverse())
         return self * converted.inverse()
 
     def __rfloordiv__(self, other):
