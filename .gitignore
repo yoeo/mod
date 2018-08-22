@@ -91,3 +91,4 @@ ENV/
 .ropeproject
 
 README.md.html
+.pytest_cache/*
