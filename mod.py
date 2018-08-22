@@ -8,7 +8,7 @@ from functools import total_ordering
 from numbers import Number
 
 
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 
 
 @total_ordering
