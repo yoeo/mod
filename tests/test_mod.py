@@ -55,7 +55,7 @@ def test_inverse():
     assert int(number) == 7
     assert number.modulus == 17
 
-    other = number.inverse()
+    other = number.inverse
     assert int(other) == 5
     assert other.modulus == 17
 
@@ -76,7 +76,7 @@ def test_objects_interaction():
 
     number = Mod(7, 17) + 12.5
     assert isinstance(number, float)
-    assert number == 2.5
+    assert number == 19.5
 
     with raises(ValueError):
         Mod(7, 17) + Mod(12, 19)
