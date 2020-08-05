@@ -8,7 +8,7 @@ from functools import total_ordering
 from numbers import Number
 
 
-__version__ = '0.2.4'
+__version__ = "0.2.4"
 
 
 @total_ordering
@@ -38,7 +38,7 @@ class Mod:
         self._value = int(value) % self._modulus
 
     def __repr__(self):
-        return '({} % {})'.format(self._value, self._modulus)
+        return "({} % {})".format(self._value, self._modulus)
 
     def __int__(self):
         return self._value
@@ -115,7 +115,7 @@ class Mod:
 
     # Arithmetic operations
 
-    def __pos__(slef):
+    def __pos__(self):
         return self.copy()
 
     def __neg__(self):
@@ -124,8 +124,9 @@ class Mod:
     def _convert(self, other):
         if isinstance(other, Mod):
             if other._modulus != self._modulus:
-                raise ValueError("Not same modulus: {} != {}".format(
-                    self._modulus, other._modulus))
+                raise ValueError(
+                    "Not same modulus: {} != {}".format(self._modulus, other._modulus)
+                )
             return other
 
         if isinstance(other, int):
