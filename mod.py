@@ -8,7 +8,7 @@ from functools import total_ordering
 from numbers import Number
 
 
-__version__ = '0.3.0'
+__version__ = "0.3.0"
 
 
 @total_ordering
@@ -49,7 +49,7 @@ class Mod:
         self._value = int(value) % self._modulus
 
     def __repr__(self):
-        return '({} % {})'.format(self._value, self._modulus)
+        return "({} % {})".format(self._value, self._modulus)
 
     def __int__(self):
         return self._value
