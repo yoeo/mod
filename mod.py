@@ -8,13 +8,24 @@ from functools import total_ordering
 from numbers import Number
 
 
-__version__ = "0.2.4"
+__version__ = "0.3.0"
 
 
 @total_ordering
 class Mod:
     """Integer number that automatically adds a modulus
-    to arithmetic operations
+    to arithmetic operations.
+
+    The floor division ``//`` implements the inverse of a multiplication
+    with a modulus. Therefore, it should be used with care to avoid errors.
+
+    >>> number = Mod(2, 3)
+    >>> number
+    (2 % 3)
+    >>> quintuple = 5 * number
+    >>> quintuple // 5
+    (2 % 3)
+    >>>
 
     :param int value: Mod number value
     :param int modulus: modulus associated with the value
@@ -42,6 +53,9 @@ class Mod:
 
     def __int__(self):
         return self._value
+
+    def __float__(self):
+        return float(self._value)
 
     def __hash__(self):
         return hash(self._value)
@@ -74,6 +88,7 @@ class Mod:
             t_value, new_t = new_t, t_value - quotient * new_t
             r_value, new_r = new_r, r_value - quotient * new_r
 
+    @property
     def inverse(self):
         """Modular inverse of the number.
 
@@ -86,7 +101,7 @@ class Mod:
         """
         r_value, t_value = self._extended_gcd()
         if r_value != 1:
-            raise ValueError("the value cannot be inverted")
+            raise ValueError("the value {} cannot be inverted".format(self))
 
         value = t_value + (self._modulus if t_value < 0 else 0)
         return Mod(value, self._modulus)
@@ -125,7 +140,9 @@ class Mod:
         if isinstance(other, Mod):
             if other._modulus != self._modulus:
                 raise ValueError(
-                    "Not same modulus: {} != {}".format(self._modulus, other._modulus)
+                    "Not same modulus: {} != {}".format(
+                        self._modulus, other._modulus
+                    )
                 )
             return other
 
@@ -137,7 +154,7 @@ class Mod:
     def __add__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other + self._value) % self._modulus
+            return self._value + other
 
         return Mod(self._value + converted._value, self._modulus)
 
@@ -146,7 +163,7 @@ class Mod:
     def __sub__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other - self._value) % self._modulus
+            return self._value - other
 
         return Mod(self._value - converted._value, self._modulus)
 
@@ -156,46 +173,48 @@ class Mod:
     def __mul__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other * self._value) % self._modulus
+            return self._value * other
 
         return Mod(self._value * converted._value, self._modulus)
 
     __rmul__ = __mul__
 
     def __truediv__(self, other):
-        converted = self._convert(other)
-        if converted is not None:
-            other = converted._value
-
-        return self._value / other
+        return float(self) / float(other)
 
     def __rtruediv__(self, other):
-        converted = self._convert(other)
-        if converted is not None:
-            other = converted._value
-
-        return other / self._value
+        return float(other) / float(self)
 
     def __floordiv__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (self._value // other) % self._modulus
+            return self._value // other
 
-        return self * converted.inverse()
+        if converted._value == 0:
+            raise ZeroDivisionError(
+                'integer division by {}'.format(converted)
+            )
+
+        inverted = (other * self.inverse)
+        return inverted.inverse
 
     def __rfloordiv__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return (other // self._value) % self._modulus
+            return other // self._value
 
-        return converted * self.inverse()
+        return converted * self.inverse
 
     def __pow__(self, other):
         converted = self._convert(other)
         if converted is None:
-            return pow(self._value, other, self._modulus)
+            return self._value ** other
 
-        result = pow(self._value, converted._value, self._modulus)
+        if isinstance(other, Mod):
+            result = pow(self._value, other._value, self._modulus)
+        else:
+            result = pow(self._value, other, self._modulus)
+
         return Mod(result, self._modulus)
 
     def __rpow__(self, other):

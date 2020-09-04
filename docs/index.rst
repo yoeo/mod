@@ -112,4 +112,4 @@ Indices
 * :ref:`modindex`
 * :ref:`search`
 
-**mod** — Copyright (c) 2017 Y. SOMDA, `MIT License <https://github.com/yoeo/mod/blob/master/LICENSE>`_
+**mod** — Copyright (c) 2020 Y. SOMDA, `MIT License <https://github.com/yoeo/mod/blob/master/LICENSE>`_
