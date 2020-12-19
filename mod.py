@@ -195,8 +195,7 @@ class Mod:
                 'integer division by {}'.format(converted)
             )
 
-        inverted = (other * self.inverse)
-        return inverted.inverse
+        return self._value* converted.inverse
 
     def __rfloordiv__(self, other):
         converted = self._convert(other)
