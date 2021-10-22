@@ -195,6 +195,10 @@ class Mod:
                 'integer division by {}'.format(converted)
             )
 
+        if self._value == 0:
+            # 0 // n = 0
+            return Mod(0, self._modulus)
+
         inverted = (other * self.inverse)
         return inverted.inverse
 
