@@ -24,7 +24,10 @@ def test_new_object():
 def test_number():
     number = Mod(7, 17)
     assert int(number) == 7
-
+    
+def test_division():
+    number2 = Mod(25, 35) // 12
+    assert int(number2) == 5
 
 def test_modulus():
     number = Mod(7, 17)
